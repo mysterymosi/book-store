@@ -32,8 +32,14 @@ export default {
 
 	methods: {
 		createGenre() {
-			this.$store.commit("genre/addGenre", { name: this.genre.name });
-            console.log("genre: ", this.genre.name);
+			this.$store.dispatch("genre/addGenre", { name: this.genre.name })
+                .then(data => {
+                    console.log(data);
+                    this.$router.replace({ path: "/store/genres" });
+                    this.genre = {
+                        name: ""
+                    };
+                });
 		}
 	}
 }	

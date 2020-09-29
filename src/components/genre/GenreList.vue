@@ -15,11 +15,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="genre in genres" :key="genre.id">
-                            <td>{{ genre.id }}</td>
+                            <td>{{ genre._id }}</td>
                             <td>{{ genre.name }}</td>
                             <!-- <td>901-6206 Cras Av.</td> -->
                             <!-- <td>Apr 24, 2019</td> -->
-                            <td><span @click="deleteGenre(genre.id)" class="badge badge-pill badge-danger">Delete</span></td>
+                            <td><span @click="deleteGenre(genre._id)" class="badge badge-pill badge-danger">Delete</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -43,8 +43,26 @@ export default {
     methods: {
     	// delete a genre
     	deleteGenre(genreId) {
-    		this.$store.commit("genre/deleteGenre", genreId);
+    		this.$store.dispatch("genre/deleteGenre", genreId)
+                .then(err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Genre deleted successfully");
+                    }
+                });
     	}
+    },
+
+    mounted() {
+        this.$store.dispatch("genre/loadGenres")
+            .then(err => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("genres loaded successfully");
+                }
+            });
     }
 };
 </script>
