@@ -4,7 +4,7 @@ const Genre = require("../models/genre"),
 // get all genres
 const genre_index = (req, res) => {
     Genre.find().sort({ createdAt: -1 }).then(result => {
-        res.json({ genre: result });
+        res.json(result);
     })
     .catch(err => {
         console.log(err);
@@ -15,9 +15,7 @@ const genre_index = (req, res) => {
 const genre_create_post = (req, res) => {
     Genre.create(req.body)
         .then(result => {
-            Book.genres.push(result);
-            Book.save();
-            res.send("genre created successfully");
+            res.status(200).json(result);
         })
         .catch(err => {
             console.log(err);
