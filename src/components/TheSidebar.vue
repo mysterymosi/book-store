@@ -23,11 +23,11 @@
                 <span class="ml-3 item-text">Books</span><span class="sr-only">(current)</span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="dashboard">
-                <li class="nav-item active">
-                  <a class="nav-link pl-3" href="./index.html"><span class="ml-1 item-text">Add books</span></a>
+                <li class="nav-item">
+                  <router-link class="nav-link pl-3" to="/store/book_create"><span class="ml-1 item-text">Add book</span></router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link class="nav-link pl-3" to="/"><span class="ml-1 item-text">View Books</span></router-link>
+                  <router-link class="nav-link pl-3" to="/store/books"><span class="ml-1 item-text">View Books</span></router-link>
                 </li>
               </ul>
             </li>
@@ -40,11 +40,11 @@
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add genre</span>
-                  </a>
+                  <router-link class="nav-link pl-3" to="/store/genre_create"><span class="ml-1 item-text">Add genre</span>
+                  </router-link>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-typograpy.html"><span class="ml-1 item-text">View genre</span></a>
+                  <router-link class="nav-link pl-3" to="/store/genres"><span class="ml-1 item-text">View genre</span></router-link>
                 </li>
               </ul>
             </li>
@@ -62,10 +62,10 @@
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="forms">
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./form_elements.html"><span class="ml-1 item-text">Add authors</span></a>
+                  <router-link class="nav-link pl-3" to="/store/author_create"><span class="ml-1 item-text">Add authors</span></router-link>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./form_advanced.html"><span class="ml-1 item-text">View authors</span></a>
+                  <router-link class="nav-link pl-3" to="/store/authors"><span class="ml-1 item-text">View authors</span></router-link>
                 </li>
               </ul>
             </li>
