@@ -4,7 +4,7 @@ const Author = require("../models/author"),
 // get all authors
 const author_index = (req, res) => {
     Author.find().sort({ createdAt: -1 }).then(result => {
-        res.json({ author: result });
+        res.json(result);
     })
     .catch(err => {
         console.log(err);
@@ -15,9 +15,7 @@ const author_index = (req, res) => {
 const author_create_post = (req, res) => {
     Author.create(req.body)
         .then(result => {
-            Book.authors.push(result);
-            Book.save();
-            res.send("author created successfully");
+            res.json(result);
         })
         .catch(err => {
             console.log(err);

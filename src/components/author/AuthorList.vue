@@ -15,11 +15,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="author in authors" :key="author.id">
-                            <td>{{ author.id }}</td>
+                            <td>{{ author._id }}</td>
                             <td>{{ author.name }}</td>
                             <!-- <td>901-6206 Cras Av.</td> -->
                             <!-- <td>Apr 24, 2019</td> -->
-                            <td><span @click="deleteAuthor(author.id)" class="badge badge-pill badge-danger">Delete</span></td>
+                            <td><span @click="deleteAuthor(author._id)" class="badge badge-pill badge-danger">Delete</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -43,8 +43,26 @@ export default {
     methods: {
     	// delete a author
     	deleteAuthor(authorId) {
-    		this.$store.commit("author/deleteAuthor", authorId);
+    		this.$store.dispatch("author/deleteAuthor", authorId)
+                .then((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Author deleted");
+                    }
+                });
     	}
+    },
+
+    mounted () {
+        this.$store.dispatch("author/loadAuthors")
+            .then((err) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log("authors loaded");
+                }
+            });
     }
 };
 </script>

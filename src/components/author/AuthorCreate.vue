@@ -32,7 +32,14 @@ export default {
 
 	methods: {
 		createAuthor() {
-			this.$store.commit("author/addAuthor", { name: this.author.name });
+			this.$store.dispatch("author/addAuthor", { name: this.author.name })
+                .then((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Author added");
+                    }
+                });
             console.log("author: ", this.author.name);
 		}
 	}
