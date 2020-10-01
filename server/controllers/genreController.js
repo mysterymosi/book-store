@@ -24,9 +24,9 @@ const genre_create_post = (req, res) => {
 
 // get a single genre
 const genre_details = (req, res) => {
-    genre.findById(req.params.id)
+    Genre.findById(req.params.id).populate("books")
         .then(result => {
-            res.json({ genre: result });
+            res.json(result);
         })
         .catch(err => {
             console.log(err);

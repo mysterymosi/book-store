@@ -16,9 +16,9 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom04">Genre</label>
-                            <select v-model="book.genre" class="custom-select" id="validationCustom04" required>
+                            <select v-model="book.genreId" class="custom-select" id="validationCustom04" required>
                             	<option selected disabled value="">Select a genre</option>
-                                <option v-for="genre in genres" :key="genre.id" :value="genre.id">{{ genre.name }}</option>
+                                <option v-for="genre in genres" :key="genre.id" :value="genre._id">{{ genre.name }}</option>
                             </select>
                             <div class="invalid-feedback"> Please select a genre. </div>
                         </div>
@@ -31,9 +31,9 @@
                     <div class="form-row">
                     	<div class="col-md-12 mb-3">
                             <label for="validationCustom04">Author</label>
-                            <select v-model="book.author" class="custom-select" id="validationCustom04" required>
+                            <select v-model="book.authorId" class="custom-select" id="validationCustom04" required>
                             	<option selected disabled value="">Select an author</option>
-                                <option v-for="author in authors" :key="author.id" :value="author.id">{{ author.name }}</option>
+                                <option v-for="author in authors" :key="author.id" :value="author._id">{{ author.name }}</option>
                             </select>
                             <div class="invalid-feedback"> Please select a author. </div>
                         </div>
@@ -72,15 +72,16 @@ export default {
 		createBook() {
 			const book = {
 				name: this.book.name,
-				// genreId: this.book.genre,
-				// authorId: this.book.author,
+				genreId: this.book.genreId,
+				authorId: this.book.authorId,
 				quantity: this.book.quantity
 			};
+            console.log("genreId: ", this.book.genreId);
+            console.log("authorId: ", this.book.authorId);
 			this.$store.dispatch("book/addBook", book).then((err) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    this.$router.replace({ path: "/store/books" });
                     this.book = {
                         name: "",
                         quantity: ""
@@ -88,6 +89,26 @@ export default {
                 }
             });
 		}
-	}
+	},
+
+    mounted () {
+        this.$store.dispatch("genre/loadGenres")
+            .then(err => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("genres loaded successfully");
+                }
+            });
+
+        this.$store.dispatch("author/loadAuthors")
+            .then(err => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("authors loaded");
+                }
+            })
+    }
 }	
 </script>

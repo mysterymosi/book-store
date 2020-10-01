@@ -5,8 +5,10 @@ import BookList from "../components/book/BookList.vue";
 import BookCreate from "../components/book/BookCreate.vue";
 import GenreList from "../components/genre/GenreList.vue";
 import GenreCreate from "../components/genre/GenreCreate.vue";
+import SingleGenre from "../components/genre/SingleGenre.vue";
 import AuthorList from "../components/author/AuthorList.vue";
 import AuthorCreate from "../components/author/AuthorCreate.vue";
+import SingleAuthor from "../components/author/SingleAuthor.vue";
 
 Vue.use(VueRouter);
 
@@ -37,13 +39,21 @@ const routes = [
             component: GenreCreate
           },
           {
+            path: "genres/:id",
+            component: SingleGenre
+          },
+          {
             path: "authors",
             component: AuthorList
           },
           {
             path: "author_create",
             component: AuthorCreate
-          }
+          },
+          {
+            path: "authors/:id",
+            component: SingleAuthor
+          }          
         ]
     },
     {

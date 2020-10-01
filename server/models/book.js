@@ -4,19 +4,9 @@ const mongoose = require("mongoose"),
 const bookSchema = new Schema({
     name: String,
 
-    genres: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Genre"
-        }
-    ],
+    genreId: String,
 
-    authors: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Author"
-        }
-    ],
+    authorId: String,
 
     quantity: String
 });

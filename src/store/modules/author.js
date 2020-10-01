@@ -10,6 +10,7 @@ const author = {
 			// { id: 3, name: "J.R.R Tolkein" },
 			// { id: 4, name: "Bill Murray" }
 		],
+		author: {}
 	},
 	mutations: {
 		ADD_AUTHOR(state, author) {
@@ -22,6 +23,11 @@ const author = {
 					state.authors.splice(i, 1);
 				}
 			}
+		},
+
+		SET_AUTHOR(state, author) {
+			Vue.set(state, "author", author);
+			console.log("author has ben set");
 		},
 
 		SET_AUTHORS(state, authors) {
@@ -51,6 +57,17 @@ const author = {
 				});
 		},
 
+		getAuthor({ commit }, authorId) {
+			return axios.get("http://localhost:3000/authors/" + authorId)
+				.then(result => {
+					console.log("single author: ", result.data);
+					commit("SET_AUTHOR", result.data);
+				})
+				.catch(err => {
+					return err;
+				}); 
+		},
+
 		deleteAuthor({ commit }, authorId) {
 			return axios.delete("http://localhost:3000/authors/" + authorId)
 				.then((result) => {
@@ -69,6 +86,16 @@ const author = {
 
 		authorCount(state) {
 			if(state.authors.length > 0) return state.authors.length;
+		},
+
+		getAuthor(state) {
+			if (state.author) return state.author;
+		},
+
+		getAuthorBookCount(state) {
+			if (state.author) {
+				return state.author.books.length;
+			}
 		}
 	}
 };

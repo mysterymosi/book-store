@@ -14,9 +14,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="author in authors" :key="author.id">
+                        <tr v-for="author in authors" :key="author._id">
                             <td>{{ author._id }}</td>
-                            <td>{{ author.name }}</td>
+                            <td><router-link :to="'/store/authors/' + author._id" style="color: inherit; text-decoration: inherit;">{{ author.name }}</router-link></td>
                             <!-- <td>901-6206 Cras Av.</td> -->
                             <!-- <td>Apr 24, 2019</td> -->
                             <td><span @click="deleteAuthor(author._id)" class="badge badge-pill badge-danger">Delete</span></td>
