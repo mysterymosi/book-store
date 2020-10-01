@@ -14,9 +14,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="genre in genres" :key="genre.id">
+                        <tr v-for="genre in genres" :key="genre._id">
                             <td>{{ genre._id }}</td>
-                            <td>{{ genre.name }}</td>
+                            <td><router-link style="color: inherit; text-decoration: inherit;" :to="'/store/genres/' + genre._id">{{ genre.name }}</router-link></td>
                             <!-- <td>901-6206 Cras Av.</td> -->
                             <!-- <td>Apr 24, 2019</td> -->
                             <td><span @click="deleteGenre(genre._id)" class="badge badge-pill badge-danger">Delete</span></td>

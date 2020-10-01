@@ -9,7 +9,9 @@ const genre = {
 			// { id: 2, name: "Drama"},
 			// { id: 3, name: "Sci-fi"},
 			// { id: 4, name: "Historical fiction"}
-		]
+		],
+
+		genre: {}
 	},
 	mutations: {
 		ADD_GENRE(state, genre) {
@@ -19,6 +21,11 @@ const genre = {
 		SET_GENRES(state, genres) {
 			Vue.set(state, "genres", genres);
 			console.log("Genre loaded");
+		},
+
+		SET_GENRE(state, genre) {
+			Vue.set(state, "genre", genre);
+			console.log("genre set");
 		},
 
 		DELETE_GENRE(state, genreId) {
@@ -51,6 +58,17 @@ const genre = {
 				});
 		},
 
+		getGenre({ commit }, genreId) {
+			return axios.get("http://localhost:3000/genres/" + genreId)
+				.then(result => {
+					console.log(result.data);
+					commit("SET_GENRE", result.data);
+				})
+				.catch(err => {
+					return err;
+				});
+		},
+
 		deleteGenre({ commit }, genreId) {
 			return axios.delete("http://localhost:3000/genres/" + genreId)
 				.then(result => {
@@ -69,6 +87,16 @@ const genre = {
 
 		genreCount(state) {
 			if (state.genres.length > 0) return state.genres.length;
+		},
+
+		getGenre(state) {
+			if (state.genre) return state.genre;
+		},
+
+		getGenreBookCount(state) {
+			if (state.genre) {
+				return state.genre.books.length;
+			}
 		}
 	}
 };
