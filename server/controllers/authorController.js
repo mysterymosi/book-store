@@ -24,9 +24,9 @@ const author_create_post = (req, res) => {
 
 // get a single author
 const author_details = (req, res) => {
-    Author.findById(req.params.id)
+    Author.findById(req.params.id).populate("books")
         .then(result => {
-            res.json({ author: result });
+            res.json(result);
         })
         .catch(err => {
             console.log(err);
